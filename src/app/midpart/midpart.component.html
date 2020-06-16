@@ -1,0 +1,58 @@
+<h5 style="text-align: center;" class="m-3">COVID-19 situation update worldwide, as of 17th June 2020</h5>
+<div class="table-responsive mt-5">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let col of colsGlobal"> {{col.header}} </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color: blue;font-weight: 600;">{{ globalStat.total_cases }}</td>
+        <td>{{ globalStat.new_cases }}</td>
+        <td>{{ globalStat.active_cases }}</td>
+        <td>{{ globalStat.new_deaths }}</td>
+        <td style="color: green;font-weight: 600;">{{ globalStat.total_recovered }}</td>
+        <td style="color: red;font-weight: 600;">{{ globalStat.total_deaths }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<p class="m-3" style="font-size: 14px;color: blue;">Coronavirus disease (COVID-19) is an infectious disease caused by a newly discovered coronavirus.
+    Most people who fall sick with COVID-19 will experience mild to moderate symptoms and recover without special treatment.
+    The coronavirus COVID-19 is affecting 214 countries and territories around the world and 2 international conveyances.
+</p>
+<h5 style="text-align: center;" class="m-3">Reported Cases and Deaths by Country</h5>
+<div class="pb-4 pt-0">
+    <p-table #dt [columns]="cols" [value]="countryStat" [responsive]="true" [scrollable]="true" scrollHeight="304px"
+          >
+        <ng-template pTemplate="caption">
+            <div class="mb-2 globalSearch">
+              <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Search Country" name="name" id='name'
+                  (input)="dt.filterGlobal($event.target.value,'contains')" />
+                <label for="name" class="ml-3" style="color: blue;">Search Country</label>
+              </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+              <td class="countryGroup" *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
+                <span class="ui-g">
+                  {{rowData[col.field]}}
+                </span>
+              </td>
+            </tr>
+        </ng-template>
+    </p-table>
+  </div>
